@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/digitizing-patient-data/static/css/main.e231be73.css",
+    "main.js": "/digitizing-patient-data/static/js/main.39f88c1a.js",
+    "index.html": "/digitizing-patient-data/index.html",
+    "main.e231be73.css.map": "/digitizing-patient-data/static/css/main.e231be73.css.map",
+    "main.39f88c1a.js.map": "/digitizing-patient-data/static/js/main.39f88c1a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e231be73.css",
+    "static/js/main.39f88c1a.js"
+  ]
+}
