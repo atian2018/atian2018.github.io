@@ -384,22 +384,199 @@
                     </div>
                 </div>
 
-                <!-- Contact Information -->
-                <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Contact Information</h3>
+                    <!-- Demographics -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Demographics</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Race/Ethnicity</label>
+                            <select class="form-select">
+                                <option value="">Select race/ethnicity</option>
+                                <option value="white" selected>White</option>
+                                <option value="black">Black or African American</option>
+                                <option value="hispanic">Hispanic or Latino</option>
+                                <option value="asian">Asian</option>
+                                <option value="native">Native American</option>
+                                <option value="pacific">Pacific Islander</option>
+                                <option value="other">Other</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Primary Language</label>
+                            <select class="form-select">
+                                <option value="">Select language</option>
+                                <option value="english" selected>English</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="french">French</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Insurance Status</label>
+                            <select class="form-select">
+                                <option value="">Select insurance</option>
+                                <option value="private" selected>Private Insurance</option>
+                                <option value="medicare">Medicare</option>
+                                <option value="medicaid">Medicaid</option>
+                                <option value="uninsured">Uninsured</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Employment Status</label>
+                            <select class="form-select">
+                                <option value="">Select employment</option>
+                                <option value="employed" selected>Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="retired">Retired</option>
+                                <option value="disabled">Disabled</option>
+                                <option value="student">Student</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <!-- Vital Signs -->
+                <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Vital Signs</h3>
                 
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="Enter email address" value="john.doe@email.com">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Blood Pressure (mmHg)</label>
+                        <input type="text" class="form-input" placeholder="e.g., 120/80" value="140/90">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Heart Rate (BPM)</label>
+                        <input type="number" class="form-input" placeholder="Heart rate" value="85">
+                    </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-input" placeholder="Enter phone number" value="+1 (555) 123-4567">
+                        <label class="form-label">Temperature (°F)</label>
+                        <input type="number" class="form-input" placeholder="Temperature" value="98.6" step="0.1">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Emergency Contact</label>
-                        <input type="text" class="form-input" placeholder="Emergency contact name" value="Jane Doe">
+                        <label class="form-label">Respiratory Rate</label>
+                        <input type="number" class="form-input" placeholder="Breaths per minute" value="16">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Weight (lbs)</label>
+                        <input type="number" class="form-input" placeholder="Weight" value="180">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Height (inches)</label>
+                        <input type="number" class="form-input" placeholder="Height" value="70">
+                    </div>
+                </div>
+
+                <!-- General Assessment -->
+                <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">General Assessment</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">General Appearance</label>
+                        <select class="form-select">
+                            <option value="">Select appearance</option>
+                            <option value="good" selected>Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                            <option value="distressed">Distressed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Skin Condition</label>
+                        <select class="form-select">
+                            <option value="">Select skin condition</option>
+                            <option value="good" selected>Good</option>
+                            <option value="dry">Dry</option>
+                            <option value="rash">Rash present</option>
+                            <option value="pale">Pale</option>
+                            <option value="jaundiced">Jaundiced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Respiratory Status</label>
+                        <select class="form-select">
+                            <option value="">Select respiratory status</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="labored">Labored breathing</option>
+                            <option value="wheezing">Wheezing</option>
+                            <option value="cough">Cough present</option>
+                            <option value="shortness">Shortness of breath</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cardiovascular Status</label>
+                        <select class="form-select">
+                            <option value="">Select cardiovascular status</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="irregular">Irregular rhythm</option>
+                            <option value="murmur">Murmur present</option>
+                            <option value="chest-pain">Chest pain</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Common Symptoms -->
+                <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Common Symptoms</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Pain Assessment (0-10 scale)</label>
+                    <input type="number" class="form-input" placeholder="Pain level" value="3" min="0" max="10">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nausea/Vomiting</label>
+                        <select class="form-select">
+                            <option value="">Select</option>
+                            <option value="none" selected>None</option>
+                            <option value="mild">Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fatigue</label>
+                        <select class="form-select">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="mild" selected>Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Appetite</label>
+                        <select class="form-select">
+                            <option value="">Select appetite</option>
+                            <option value="good" selected>Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                            <option value="none">No appetite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sleep Quality</label>
+                        <select class="form-select">
+                            <option value="">Select sleep quality</option>
+                            <option value="good">Good</option>
+                            <option value="fair" selected>Fair</option>
+                            <option value="poor">Poor</option>
+                            <option value="insomnia">Insomnia</option>
+                        </select>
                     </div>
                 </div>
 
@@ -412,11 +589,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Secondary Conditions</label>
-                    <textarea class="form-textarea" placeholder="Enter any secondary conditions or comorbidities">Type 2 Diabetes, High Cholesterol</textarea>
+                    <label class="form-label">Current Medications</label>
+                    <textarea class="form-textarea" placeholder="List current medications and dosages">Lisinopril 10mg daily, Metformin 500mg twice daily</textarea>
                 </div>
 
                 <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Allergies</label>
+                        <input type="text" class="form-input" placeholder="Enter known allergies" value="Penicillin, Shellfish">
+                    </div>
                     <div class="form-group">
                         <label class="form-label">Blood Type</label>
                         <select class="form-select">
@@ -430,10 +611,6 @@
                             <option value="O+" selected>O+</option>
                             <option value="O-">O-</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Allergies</label>
-                        <input type="text" class="form-input" placeholder="Enter known allergies" value="Penicillin, Shellfish">
                     </div>
                 </div>
 

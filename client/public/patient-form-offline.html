@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Form - Offline Mode - Patient Data System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 20px;
+            margin-bottom: 32px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 64px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .nav-status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+        }
+
+        .nav-user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .nav-role-badge {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+            background-color: white;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background-color: #fef3c7;
+            border-radius: 12px;
+            border: 2px solid #f59e0b;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .offline-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fef3c7;
+            border-bottom: 3px solid #f59e0b;
+            color: #92400e;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .offline-padding {
+            padding-top: 60px;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 24px;
+        }
+
+        .floating-button:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Banner -->
+    <div class="offline-banner">
+        ⚠️ OFFLINE MODE - Your data is being saved locally and will sync when connection is restored
+    </div>
+
+    <div class="offline-padding">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-content">
+                <div class="nav-menu">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </a>
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-file-alt"></i>
+                        Patient Form
+                    </a>
+                    <a href="reports.html" class="nav-link">
+                        <i class="fas fa-database"></i>
+                        Reports
+                    </a>
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        Admin Panel
+                    </a>
+
+                    <!-- Right side items -->
+                    <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                        <!-- Connection status -->
+                        <div class="nav-status-indicator">
+                            <div style="width: 8px; height: 8px; background-color: #f59e0b; border-radius: 50%;"></div>
+                            OFFLINE
+                        </div>
+
+                        <!-- User info -->
+                        <div class="nav-user-info">
+                            <i class="fas fa-user"></i>
+                            <span>admin</span>
+                            <span class="nav-role-badge">administrator</span>
+                            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; min-width: auto;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Patient Data Entry Form</h1>
+                    <p class="page-subtitle">Enter patient information. Data will be saved locally if offline.</p>
+                </div>
+
+                <!-- Connection Status -->
+                <div class="connection-status">
+                    <i class="fas fa-wifi-off"></i>
+                    <span>OFFLINE - Local Save</span>
+                </div>
+            </div>
+
+            <!-- Patient Form -->
+            <div class="card">
+                <form>
+                    <!-- Patient ID (Auto-generated) -->
+                    <div class="form-group">
+                        <label class="form-label">Patient ID <span class="required">*</span></label>
+                        <input type="text" class="form-input" value="PAT-123456-ABC" readonly style="background-color: #f3f4f6;">
+                        <small style="color: #6b7280; font-size: 14px;">Auto-generated unique identifier</small>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Personal Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="Enter first name" value="John">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="Enter last name" value="Doe">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth <span class="required">*</span></label>
+                            <input type="date" class="form-input" value="1985-06-15">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Gender <span class="required">*</span></label>
+                            <select class="form-select">
+                                <option value="">Select gender</option>
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Demographics -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Demographics</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Race/Ethnicity</label>
+                            <select class="form-select">
+                                <option value="">Select race/ethnicity</option>
+                                <option value="white" selected>White</option>
+                                <option value="black">Black or African American</option>
+                                <option value="hispanic">Hispanic or Latino</option>
+                                <option value="asian">Asian</option>
+                                <option value="native">Native American</option>
+                                <option value="pacific">Pacific Islander</option>
+                                <option value="other">Other</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Primary Language</label>
+                            <select class="form-select">
+                                <option value="">Select language</option>
+                                <option value="english" selected>English</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="french">French</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Insurance Status</label>
+                            <select class="form-select">
+                                <option value="">Select insurance</option>
+                                <option value="private" selected>Private Insurance</option>
+                                <option value="medicare">Medicare</option>
+                                <option value="medicaid">Medicaid</option>
+                                <option value="uninsured">Uninsured</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Employment Status</label>
+                            <select class="form-select">
+                                <option value="">Select employment</option>
+                                <option value="employed" selected>Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="retired">Retired</option>
+                                <option value="disabled">Disabled</option>
+                                <option value="student">Student</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Vital Signs -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Vital Signs</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Blood Pressure (mmHg)</label>
+                            <input type="text" class="form-input" placeholder="e.g., 120/80" value="140/90">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Heart Rate (BPM)</label>
+                            <input type="number" class="form-input" placeholder="Heart rate" value="85">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Temperature (°F)</label>
+                            <input type="number" class="form-input" placeholder="Temperature" value="98.6" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Respiratory Rate</label>
+                            <input type="number" class="form-input" placeholder="Breaths per minute" value="16">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Weight (lbs)</label>
+                            <input type="number" class="form-input" placeholder="Weight" value="180">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Height (inches)</label>
+                            <input type="number" class="form-input" placeholder="Height" value="70">
+                        </div>
+                    </div>
+
+                    <!-- General Assessment -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">General Assessment</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">General Appearance</label>
+                            <select class="form-select">
+                                <option value="">Select appearance</option>
+                                <option value="good" selected>Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor</option>
+                                <option value="distressed">Distressed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Skin Condition</label>
+                            <select class="form-select">
+                                <option value="">Select skin condition</option>
+                                <option value="good" selected>Good</option>
+                                <option value="dry">Dry</option>
+                                <option value="rash">Rash present</option>
+                                <option value="pale">Pale</option>
+                                <option value="jaundiced">Jaundiced</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Respiratory Status</label>
+                            <select class="form-select">
+                                <option value="">Select respiratory status</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="labored">Labored breathing</option>
+                                <option value="wheezing">Wheezing</option>
+                                <option value="cough">Cough present</option>
+                                <option value="shortness">Shortness of breath</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cardiovascular Status</label>
+                            <select class="form-select">
+                                <option value="">Select cardiovascular status</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="irregular">Irregular rhythm</option>
+                                <option value="murmur">Murmur present</option>
+                                <option value="chest-pain">Chest pain</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Common Symptoms -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Common Symptoms</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pain Assessment (0-10 scale)</label>
+                        <input type="number" class="form-input" placeholder="Pain level" value="3" min="0" max="10">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Nausea/Vomiting</label>
+                            <select class="form-select">
+                                <option value="">Select</option>
+                                <option value="none" selected>None</option>
+                                <option value="mild">Mild</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="severe">Severe</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fatigue</label>
+                            <select class="form-select">
+                                <option value="">Select</option>
+                                <option value="none">None</option>
+                                <option value="mild" selected>Mild</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="severe">Severe</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Appetite</label>
+                            <select class="form-select">
+                                <option value="">Select appetite</option>
+                                <option value="good" selected>Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor</option>
+                                <option value="none">No appetite</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Sleep Quality</label>
+                            <select class="form-select">
+                                <option value="">Select sleep quality</option>
+                                <option value="good">Good</option>
+                                <option value="fair" selected>Fair</option>
+                                <option value="poor">Poor</option>
+                                <option value="insomnia">Insomnia</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Medical Information -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Medical Information</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Primary Diagnosis <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="Enter primary diagnosis" value="Hypertension">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Current Medications</label>
+                        <textarea class="form-textarea" placeholder="List current medications and dosages">Lisinopril 10mg daily, Metformin 500mg twice daily</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Allergies</label>
+                            <input type="text" class="form-input" placeholder="Enter known allergies" value="Penicillin, Shellfish">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Blood Type</label>
+                            <select class="form-select">
+                                <option value="">Select blood type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+" selected>O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Treatment Information -->
+                    <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb;">Treatment Information</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Current Medications</label>
+                        <textarea class="form-textarea" placeholder="List current medications and dosages">Lisinopril 10mg daily, Metformin 500mg twice daily</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Treatment Notes</label>
+                        <textarea class="form-textarea" placeholder="Enter any additional treatment notes or observations">Patient responding well to current medication regimen. Blood pressure readings have improved significantly over the past month.</textarea>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Save Patient Record (Offline)
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Floating Connection Test Button -->
+        <button class="floating-button" title="Connection Test">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+</body>
+</html>
