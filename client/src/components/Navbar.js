@@ -20,10 +20,6 @@ const Navbar = ({ user, onLogout }) => {
   return (
     <nav className="nav">
       <div className="nav-content">
-        <Link to="/dashboard" className="nav-brand">
-          Patient Data System
-        </Link>
-        
         <div className="nav-menu">
           {navItems.map(({ path, label, icon: Icon }) => (
             <Link
