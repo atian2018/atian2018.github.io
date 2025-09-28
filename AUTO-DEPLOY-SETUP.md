@@ -19,9 +19,8 @@ Your React app will now automatically deploy to GitHub Pages whenever you push t
 1. Go to your repository: `https://github.com/atian2018/atian2018.github.io`
 2. Click **Settings** tab
 3. Scroll down to **Pages** section
-4. Under **Source**, select **Deploy from a branch**
-5. Select **gh-pages** branch and **/ (root)** folder
-6. Click **Save**
+4. Under **Source**, select **GitHub Actions**
+5. Click **Save**
 
 ### 2. Push Your Code
 ```bash

@@ -77,12 +77,6 @@ This prototype emphasizes all 10 Nielsen usability heuristics:
 ### Option 1: Local Development
 1. **Install Dependencies**
    ```bash
-   cd /Users/alantian/work/gatech/juniordesign
-   ./start-frontend.sh
-   ```
-   
-   Or manually:
-   ```bash
    cd client && npm install && npm start
    ```
 
@@ -90,13 +84,10 @@ This prototype emphasizes all 10 Nielsen usability heuristics:
    - Frontend: http://localhost:3000
    - No backend required - uses mock data for demonstration
 
-### Option 2: Deploy to GitHub Pages (Recommended for Demos)
-1. **Follow the deployment guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md)
-2. **Quick deployment**:
-   ```bash
-   ./deploy-to-github-pages.sh
-   ```
-3. **Live demo**: Your app will be available at `https://YOUR_USERNAME.github.io/digitizing-patient-data`
+### Option 2: Auto-Deploy to GitHub Pages (Recommended for Demos)
+1. **Follow the auto-deploy guide**: See [AUTO-DEPLOY-SETUP.md](./AUTO-DEPLOY-SETUP.md)
+2. **Push to main branch** - GitHub Actions handles everything automatically
+3. **Live demo**: Your app will be available at `https://atian2018.github.io`
 
 ## 👤 Demo Credentials
 
