@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Offline Mode - Patient Data System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 20px;
+            margin-bottom: 32px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 64px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .nav-status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+        }
+
+        .nav-user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .nav-role-badge {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-synced {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .sync-indicator {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 32px;
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .sync-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sync-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #f59e0b;
+        }
+
+        .sync-text {
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .sync-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .sync-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+        }
+
+        .sync-stat {
+            text-align: center;
+        }
+
+        .sync-stat-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .sync-stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+        }
+
+        .offline-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fef3c7;
+            border-bottom: 3px solid #f59e0b;
+            color: #92400e;
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .offline-padding {
+            padding-top: 60px;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 24px;
+        }
+
+        .floating-button:hover {
+            background-color: #2563eb;
+        }
+
+        .offline-notice {
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .offline-notice-icon {
+            color: #f59e0b;
+            font-size: 24px;
+        }
+
+        .offline-notice-text {
+            color: #92400e;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Banner -->
+    <div class="offline-banner">
+        ⚠️ OFFLINE MODE - Your data is being saved locally and will sync when connection is restored
+    </div>
+
+    <div class="offline-padding">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-content">
+                <div class="nav-menu">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </a>
+                    <a href="patient-form-offline.html" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        Patient Form
+                    </a>
+                    <a href="reports.html" class="nav-link">
+                        <i class="fas fa-database"></i>
+                        Reports
+                    </a>
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        Admin Panel
+                    </a>
+
+                    <!-- Right side items -->
+                    <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                        <!-- Connection status -->
+                        <div class="nav-status-indicator">
+                            <div style="width: 8px; height: 8px; background-color: #f59e0b; border-radius: 50%;"></div>
+                            OFFLINE
+                        </div>
+
+                        <!-- User info -->
+                        <div class="nav-user-info">
+                            <i class="fas fa-user"></i>
+                            <span>admin</span>
+                            <span class="nav-role-badge">administrator</span>
+                            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; min-width: auto;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Overview of patient data collection and sync status</p>
+                </div>
+                <a href="patient-form-offline.html" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    New Patient
+                </a>
+            </div>
+
+            <!-- Offline Notice -->
+            <div class="offline-notice">
+                <i class="fas fa-wifi-off offline-notice-icon"></i>
+                <div class="offline-notice-text">
+                    You are currently offline. Data entered will be saved locally and synchronized when connection is restored.
+                </div>
+            </div>
+
+            <!-- Sync Status Indicator -->
+            <div class="sync-indicator">
+                <div class="sync-status">
+                    <div class="sync-info">
+                        <div class="sync-dot"></div>
+                        <span class="sync-text">3 records pending sync</span>
+                    </div>
+                    <div class="sync-actions">
+                        <button class="btn btn-secondary" disabled>
+                            <i class="fas fa-sync"></i>
+                            Manual Sync (Offline)
+                        </button>
+                    </div>
+                </div>
+                <div class="sync-stats">
+                    <div class="sync-stat">
+                        <div class="sync-stat-number">18</div>
+                        <div class="sync-stat-label">Total Records</div>
+                    </div>
+                    <div class="sync-stat">
+                        <div class="sync-stat-number">15</div>
+                        <div class="sync-stat-label">Synced</div>
+                    </div>
+                    <div class="sync-stat">
+                        <div class="sync-stat-number">3</div>
+                        <div class="sync-stat-label">Pending</div>
+                    </div>
+                    <div class="sync-stat">
+                        <div class="sync-stat-number">0</div>
+                        <div class="sync-stat-label">Errors</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #3b82f6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Total Patients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #10b981;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Synced Records</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #f59e0b;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Pending Sync</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #ef4444;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Sync Errors</div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <h2 style="font-size: 20px; font-weight: 600; color: #111827; margin-bottom: 16px;">Recent Activity</h2>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background-color: #f8fafc; border-radius: 8px;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fef3c7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: #92400e;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827;">New patient record created (offline)</div>
+                            <div style="font-size: 14px; color: #6b7280;">PAT-456789-XYZ • 5 minutes ago</div>
+                        </div>
+                        <span class="status-pending" style="padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">Pending</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background-color: #f8fafc; border-radius: 8px;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fef3c7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: #92400e;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827;">New patient record created (offline)</div>
+                            <div style="font-size: 14px; color: #6b7280;">PAT-234567-DEF • 12 minutes ago</div>
+                        </div>
+                        <span class="status-pending" style="padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">Pending</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background-color: #f8fafc; border-radius: 8px;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fef3c7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: #92400e;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827;">New patient record created (offline)</div>
+                            <div style="font-size: 14px; color: #6b7280;">PAT-345678-GHI • 25 minutes ago</div>
+                        </div>
+                        <span class="status-pending" style="padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">Pending</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background-color: #f8fafc; border-radius: 8px;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #d1fae5; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-sync" style="color: #065f46;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827;">Bulk sync completed</div>
+                            <div style="font-size: 14px; color: #6b7280;">5 records synchronized • 2 hours ago</div>
+                        </div>
+                        <span class="status-synced" style="padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">Success</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Connection Test Button -->
+        <button class="floating-button" title="Connection Test">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+</body>
+</html>

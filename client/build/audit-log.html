@@ -507,30 +507,12 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-plus" style="color: #10b981;"></i>
-                        CREATE_PATIENT
+                        Patient Record Created
                     </div>
                     <div class="audit-time">Jan 18, 2024 at 10:30 AM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>researcher@clinic.com</strong> created patient record <strong>PAT-123456-ABC (John Doe)</strong>
-                </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">patient_id:</span>
-                        <span class="change-value">null → PAT-123456-ABC</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">first_name:</span>
-                        <span class="change-value">null → John</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">last_name:</span>
-                        <span class="change-value">null → Doe</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">diagnosis:</span>
-                        <span class="change-value">null → Hypertension</span>
-                    </div>
+                    <strong>researcher@clinic.com</strong> created patient <strong>PAT-123456-ABC (John Doe)</strong>
                 </div>
             </div>
 
@@ -538,22 +520,12 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-sync" style="color: #3b82f6;"></i>
-                        SYNC_RECORD
+                        Record Synchronized
                     </div>
                     <div class="audit-time">Jan 18, 2024 at 10:32 AM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>researcher@clinic.com</strong> synchronized patient record <strong>PAT-123456-ABC (John Doe)</strong>
-                </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">sync_status:</span>
-                        <span class="change-value">pending → synced</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">sync_timestamp:</span>
-                        <span class="change-value">null → 2024-01-18T10:32:00Z</span>
-                    </div>
+                    <strong>researcher@clinic.com</strong> synced patient <strong>PAT-123456-ABC</strong> to REDCap
                 </div>
             </div>
 
@@ -561,22 +533,12 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-user-plus" style="color: #10b981;"></i>
-                        CREATE_USER
+                        User Account Created
                     </div>
                     <div class="audit-time">Jan 17, 2024 at 2:45 PM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>admin@clinic.com</strong> created user account <strong>researcher2@clinic.com</strong>
-                </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">email:</span>
-                        <span class="change-value">null → researcher2@clinic.com</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">role:</span>
-                        <span class="change-value">null → researcher</span>
-                    </div>
+                    <strong>admin@clinic.com</strong> created account for <strong>researcher2@clinic.com</strong>
                 </div>
             </div>
 
@@ -584,30 +546,12 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-plus" style="color: #10b981;"></i>
-                        CREATE_PATIENT
+                        Patient Record Created
                     </div>
                     <div class="audit-time">Jan 17, 2024 at 1:20 PM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>researcher@clinic.com</strong> created patient record <strong>PAT-789012-DEF (Jane Smith)</strong>
-                </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">patient_id:</span>
-                        <span class="change-value">null → PAT-789012-DEF</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">first_name:</span>
-                        <span class="change-value">null → Jane</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">last_name:</span>
-                        <span class="change-value">null → Smith</span>
-                    </div>
-                    <div class="change-item">
-                        <span class="change-field">diagnosis:</span>
-                        <span class="change-value">null → Diabetes</span>
-                    </div>
+                    <strong>researcher@clinic.com</strong> created patient <strong>PAT-789012-DEF (Jane Smith)</strong>
                 </div>
             </div>
 
@@ -615,18 +559,12 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-user-cog" style="color: #f59e0b;"></i>
-                        TOGGLE_USER_STATUS
+                        User Status Changed
                     </div>
                     <div class="audit-time">Jan 16, 2024 at 9:15 AM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>admin@clinic.com</strong> toggled user status for <strong>researcher2@clinic.com</strong>
-                </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">is_active:</span>
-                        <span class="change-value">true → false</span>
-                    </div>
+                    <strong>admin@clinic.com</strong> deactivated user <strong>researcher2@clinic.com</strong>
                 </div>
             </div>
 
@@ -634,22 +572,38 @@
                 <div class="audit-header">
                     <div class="audit-action">
                         <i class="fas fa-sync" style="color: #3b82f6;"></i>
-                        SYNC_RECORD
+                        Record Synchronized
                     </div>
                     <div class="audit-time">Jan 15, 2024 at 3:30 PM</div>
                 </div>
                 <div class="audit-details">
-                    <strong>researcher@clinic.com</strong> synchronized patient record <strong>PAT-345678-GHI (Robert Johnson)</strong>
+                    <strong>researcher@clinic.com</strong> synced patient <strong>PAT-345678-GHI</strong> to REDCap
                 </div>
-                <div class="audit-changes">
-                    <div class="change-item">
-                        <span class="change-field">sync_status:</span>
-                        <span class="change-value">pending → synced</span>
+            </div>
+
+            <div class="audit-item">
+                <div class="audit-header">
+                    <div class="audit-action">
+                        <i class="fas fa-plus" style="color: #10b981;"></i>
+                        Patient Record Created
                     </div>
-                    <div class="change-item">
-                        <span class="change-field">sync_timestamp:</span>
-                        <span class="change-value">null → 2024-01-15T15:30:00Z</span>
+                    <div class="audit-time">Jan 15, 2024 at 2:15 PM</div>
+                </div>
+                <div class="audit-details">
+                    <strong>researcher@clinic.com</strong> created patient <strong>PAT-345678-GHI (Robert Johnson)</strong>
+                </div>
+            </div>
+
+            <div class="audit-item">
+                <div class="audit-header">
+                    <div class="audit-action">
+                        <i class="fas fa-sync" style="color: #3b82f6;"></i>
+                        Bulk Sync Completed
                     </div>
+                    <div class="audit-time">Jan 14, 2024 at 4:20 PM</div>
+                </div>
+                <div class="audit-details">
+                    <strong>admin@clinic.com</strong> synchronized 5 patient records to REDCap
                 </div>
             </div>
         </div>
